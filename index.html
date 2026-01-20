@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
     <title>TileCalc Pro - Smart Tile Calculator</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -33,18 +33,22 @@
             --shadow-lg: 0 16px 40px rgba(99, 102, 241, 0.16);
         }
 
+        html {
+            -webkit-text-size-adjust: 100%;
+            -ms-text-size-adjust: 100%;
+        }
+
         body {
             font-family: 'Inter', sans-serif;
             background: linear-gradient(135deg, #1a1a2e 0%, #16213e 25%, #0f3460 50%, #533483 75%, #8b2e6f 100%);
             background-attachment: fixed;
             min-height: 100vh;
-            padding: 30px 20px;
+            padding: 20px;
             color: var(--text-dark);
             position: relative;
             overflow-x: hidden;
         }
 
-        /* Rich decorative background overlay */
         body::before {
             content: '';
             position: fixed;
@@ -71,21 +75,21 @@
         header {
             text-align: center;
             color: white;
-            margin-bottom: 50px;
+            margin-bottom: 40px;
             animation: slideDown 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
         }
 
         header h1 {
             font-family: 'Poppins', sans-serif;
-            font-size: 4em;
+            font-size: clamp(2.2em, 8vw, 4em);
             font-weight: 800;
-            margin-bottom: 12px;
+            margin-bottom: 10px;
             text-shadow: 3px 3px 8px rgba(0, 0, 0, 0.4);
             letter-spacing: -1px;
         }
 
         header p {
-            font-size: 1.2em;
+            font-size: clamp(1em, 4vw, 1.2em);
             opacity: 0.95;
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
             font-weight: 300;
@@ -95,24 +99,27 @@
         /* Tabs Navigation */
         .tabs-navigation {
             display: flex;
-            gap: 12px;
-            margin-bottom: 40px;
+            gap: 10px;
+            margin-bottom: 30px;
             justify-content: center;
             flex-wrap: wrap;
         }
 
         .tab-btn {
-            padding: 14px 32px;
+            padding: 12px 24px;
             background: rgba(255, 255, 255, 0.12);
             color: white;
             border: 2px solid rgba(255, 255, 255, 0.2);
-            border-radius: 12px;
-            font-size: 1.05em;
+            border-radius: 10px;
+            font-size: clamp(0.9em, 3vw, 1.05em);
             font-weight: 600;
             cursor: pointer;
             transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
             backdrop-filter: blur(20px);
             font-family: 'Poppins', sans-serif;
+            flex: 1;
+            min-width: 150px;
+            max-width: 200px;
         }
 
         .tab-btn:hover {
@@ -141,9 +148,16 @@
         /* Grid Layout */
         .grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
-            gap: 32px;
-            margin-bottom: 40px;
+            grid-template-columns: 1fr;
+            gap: 24px;
+            margin-bottom: 30px;
+        }
+
+        @media (min-width: 768px) {
+            .grid {
+                grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+                gap: 32px;
+            }
         }
 
         .grid.full {
@@ -153,8 +167,8 @@
         /* Card - Modern Design */
         .card {
             background: var(--card-bg);
-            border-radius: 20px;
-            padding: 35px;
+            border-radius: 16px;
+            padding: 24px;
             box-shadow: var(--shadow);
             transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
             animation: fadeInUp 0.6s ease-out;
@@ -162,6 +176,18 @@
             backdrop-filter: blur(5px);
             position: relative;
             overflow: hidden;
+        }
+
+        @media (min-width: 768px) {
+            .card {
+                border-radius: 20px;
+                padding: 35px;
+            }
+
+            .card:hover {
+                transform: translateY(-8px);
+                box-shadow: var(--shadow-lg);
+            }
         }
 
         .card::before {
@@ -175,28 +201,24 @@
             pointer-events: none;
         }
 
-        .card:hover {
-            transform: translateY(-8px);
-            box-shadow: var(--shadow-lg);
-        }
-
         .card h2 {
             font-family: 'Poppins', sans-serif;
-            font-size: 1.6em;
-            margin-bottom: 28px;
+            font-size: clamp(1.3em, 5vw, 1.6em);
+            margin-bottom: 20px;
             color: var(--primary);
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 10px;
             font-weight: 700;
         }
 
         .card h2::before {
             content: '';
-            width: 5px;
-            height: 32px;
+            width: 4px;
+            height: clamp(24px, 6vw, 32px);
             background: linear-gradient(180deg, var(--primary) 0%, var(--primary-light) 100%);
             border-radius: 3px;
+            flex-shrink: 0;
         }
 
         .card.secondary h2 {
@@ -217,12 +239,12 @@
 
         /* Form Group */
         .form-group {
-            margin-bottom: 24px;
+            margin-bottom: 18px;
         }
 
         .form-group label {
             display: block;
-            margin-bottom: 10px;
+            margin-bottom: 8px;
             font-weight: 600;
             color: var(--text-dark);
             font-size: 0.95em;
@@ -245,10 +267,10 @@
         input[type="text"],
         select {
             width: 100%;
-            padding: 13px 16px;
+            padding: 12px 14px;
             border: 2px solid var(--border);
-            border-radius: 10px;
-            font-size: 1em;
+            border-radius: 8px;
+            font-size: 16px;
             transition: all 0.3s ease;
             font-weight: 500;
             font-family: 'Inter', sans-serif;
@@ -260,24 +282,24 @@
         select:focus {
             outline: none;
             border-color: var(--primary);
-            box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.12);
+            box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.12);
             background: white;
         }
 
         .input-unit {
             position: absolute;
-            right: 16px;
+            right: 14px;
             color: var(--primary);
             font-weight: 700;
-            font-size: 0.95em;
+            font-size: 0.9em;
             pointer-events: none;
         }
 
         /* Helper Text */
         .helper-text {
-            font-size: 0.85em;
+            font-size: 0.82em;
             color: var(--text-light);
-            margin-top: 6px;
+            margin-top: 5px;
             font-weight: 400;
         }
 
@@ -285,12 +307,12 @@
         .info-box {
             background: linear-gradient(135deg, rgba(255, 255, 255, 0.98) 0%, rgba(248, 250, 252, 0.98) 100%);
             border-left: 5px solid var(--primary);
-            padding: 20px;
-            border-radius: 12px;
-            margin: 24px 0;
-            font-size: 0.92em;
+            padding: 16px;
+            border-radius: 10px;
+            margin: 18px 0;
+            font-size: 0.88em;
             color: var(--text-dark);
-            line-height: 1.7;
+            line-height: 1.6;
             box-shadow: 0 4px 16px rgba(99, 102, 241, 0.1);
             backdrop-filter: blur(10px);
         }
@@ -313,43 +335,55 @@
 
         /* Preset Options */
         .preset-group {
-            margin-bottom: 24px;
+            margin-bottom: 18px;
         }
 
         .preset-label {
-            font-size: 0.9em;
+            font-size: 0.88em;
             color: var(--text-light);
             display: block;
-            margin-bottom: 12px;
+            margin-bottom: 10px;
             font-weight: 600;
             font-family: 'Poppins', sans-serif;
         }
 
         .preset-buttons {
             display: flex;
-            gap: 10px;
+            gap: 8px;
             flex-wrap: wrap;
         }
 
         .preset-btn {
-            padding: 11px 16px;
+            padding: 10px 12px;
             background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
             border: 2px solid var(--border);
-            border-radius: 9px;
+            border-radius: 8px;
             cursor: pointer;
-            font-size: 0.9em;
+            font-size: 0.85em;
             font-weight: 600;
             color: var(--text-dark);
             transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
             flex: 1;
-            min-width: 100px;
+            min-width: 70px;
             font-family: 'Poppins', sans-serif;
         }
 
-        .preset-btn:hover {
-            border-color: var(--primary);
-            background: rgba(99, 102, 241, 0.08);
-            transform: translateY(-2px);
+        .preset-btn:active {
+            transform: scale(0.95);
+        }
+
+        @media (min-width: 768px) {
+            .preset-btn {
+                padding: 11px 16px;
+                font-size: 0.9em;
+                min-width: 100px;
+            }
+
+            .preset-btn:hover {
+                border-color: var(--primary);
+                background: rgba(99, 102, 241, 0.08);
+                transform: translateY(-2px);
+            }
         }
 
         .preset-btn.selected {
@@ -361,27 +395,39 @@
         /* Button */
         .btn {
             width: 100%;
-            padding: 14px 24px;
+            padding: 13px 20px;
             background: linear-gradient(135deg, var(--primary), var(--secondary));
             color: white;
             border: none;
-            border-radius: 10px;
-            font-size: 1.05em;
+            border-radius: 8px;
+            font-size: clamp(0.95em, 3vw, 1.05em);
             font-weight: 600;
             cursor: pointer;
             transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
-            margin-top: 20px;
+            margin-top: 16px;
             box-shadow: 0 6px 20px rgba(99, 102, 241, 0.3);
             font-family: 'Poppins', sans-serif;
-        }
-
-        .btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 30px rgba(99, 102, 241, 0.4);
+            touch-action: manipulation;
         }
 
         .btn:active {
-            transform: translateY(0);
+            transform: scale(0.98);
+        }
+
+        @media (min-width: 768px) {
+            .btn {
+                padding: 14px 24px;
+                margin-top: 20px;
+            }
+
+            .btn:hover {
+                transform: translateY(-3px);
+                box-shadow: 0 10px 30px rgba(99, 102, 241, 0.4);
+            }
+
+            .btn:active {
+                transform: translateY(0);
+            }
         }
 
         .btn.secondary {
@@ -394,8 +440,8 @@
 
         .btn.sm {
             width: auto;
-            padding: 10px 18px;
-            font-size: 0.9em;
+            padding: 8px 14px;
+            font-size: 0.85em;
             margin-top: 0;
         }
 
@@ -411,25 +457,45 @@
         .rooms-table {
             width: 100%;
             border-collapse: collapse;
-            margin: 24px 0;
+            margin: 18px 0;
             background: white;
-            border-radius: 12px;
+            border-radius: 10px;
             overflow: hidden;
             box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+            font-size: 0.85em;
+        }
+
+        @media (min-width: 768px) {
+            .rooms-table {
+                font-size: 1em;
+                border-radius: 12px;
+            }
         }
 
         .rooms-table th {
             background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
             color: white;
-            padding: 16px;
+            padding: 12px;
             text-align: left;
             font-weight: 600;
             font-family: 'Poppins', sans-serif;
         }
 
+        @media (min-width: 768px) {
+            .rooms-table th {
+                padding: 16px;
+            }
+        }
+
         .rooms-table td {
-            padding: 14px 16px;
+            padding: 10px 12px;
             border-bottom: 1px solid var(--border);
+        }
+
+        @media (min-width: 768px) {
+            .rooms-table td {
+                padding: 14px 16px;
+            }
         }
 
         .rooms-table tr:last-child td {
@@ -462,16 +528,30 @@
         /* Results Grid */
         .results-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 24px;
-            margin: 40px 0;
+            grid-template-columns: 1fr;
+            gap: 16px;
+            margin: 30px 0;
+        }
+
+        @media (min-width: 480px) {
+            .results-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (min-width: 768px) {
+            .results-grid {
+                grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+                gap: 24px;
+                margin: 40px 0;
+            }
         }
 
         .result-box {
             background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
             color: white;
-            padding: 30px;
-            border-radius: 16px;
+            padding: 24px;
+            border-radius: 12px;
             text-align: center;
             box-shadow: 0 8px 24px rgba(99, 102, 241, 0.2);
             animation: scaleIn 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
@@ -479,28 +559,41 @@
             font-family: 'Poppins', sans-serif;
         }
 
+        @media (min-width: 768px) {
+            .result-box {
+                padding: 30px;
+                border-radius: 16px;
+            }
+        }
+
         .result-box.hidden {
             display: none;
         }
 
         .result-box h3 {
-            font-size: 0.85em;
+            font-size: 0.75em;
             opacity: 0.9;
-            margin-bottom: 12px;
+            margin-bottom: 8px;
             text-transform: uppercase;
-            letter-spacing: 1.5px;
+            letter-spacing: 1px;
             font-weight: 700;
         }
 
         .result-box .value {
-            font-size: 2.8em;
+            font-size: 2.2em;
             font-weight: 800;
-            margin-bottom: 8px;
+            margin-bottom: 6px;
             word-break: break-word;
         }
 
+        @media (min-width: 768px) {
+            .result-box .value {
+                font-size: 2.8em;
+            }
+        }
+
         .result-box .unit {
-            font-size: 0.82em;
+            font-size: 0.75em;
             opacity: 0.85;
         }
 
@@ -522,16 +615,24 @@
         /* Details Box */
         .details-box {
             background: var(--light);
-            padding: 24px;
-            border-radius: 12px;
-            margin-top: 24px;
+            padding: 18px;
+            border-radius: 10px;
+            margin-top: 18px;
             border-left: 5px solid var(--primary);
         }
 
+        @media (min-width: 768px) {
+            .details-box {
+                padding: 24px;
+                border-radius: 12px;
+                margin-top: 24px;
+            }
+        }
+
         .details-box h3 {
-            margin-bottom: 16px;
+            margin-bottom: 12px;
             color: var(--text-dark);
-            font-size: 1.05em;
+            font-size: 1em;
             font-family: 'Poppins', sans-serif;
             font-weight: 700;
         }
@@ -541,11 +642,19 @@
         }
 
         .details-list li {
-            padding: 12px 0;
+            padding: 10px 0;
             border-bottom: 1px solid var(--border);
             display: flex;
             justify-content: space-between;
             align-items: center;
+            font-size: 0.9em;
+        }
+
+        @media (min-width: 768px) {
+            .details-list li {
+                padding: 12px 0;
+                font-size: 1em;
+            }
         }
 
         .details-list li:last-child {
@@ -566,25 +675,46 @@
         .cost-table {
             width: 100%;
             border-collapse: collapse;
-            margin: 24px 0;
+            margin: 18px 0;
             background: white;
-            border-radius: 12px;
+            border-radius: 10px;
             overflow: hidden;
             box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+            font-size: 0.85em;
+        }
+
+        @media (min-width: 768px) {
+            .cost-table {
+                font-size: 1em;
+                border-radius: 12px;
+                margin: 24px 0;
+            }
         }
 
         .cost-table th {
             background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
             color: white;
-            padding: 16px;
+            padding: 12px;
             text-align: left;
             font-weight: 600;
             font-family: 'Poppins', sans-serif;
         }
 
+        @media (min-width: 768px) {
+            .cost-table th {
+                padding: 16px;
+            }
+        }
+
         .cost-table td {
-            padding: 14px 16px;
+            padding: 10px 12px;
             border-bottom: 1px solid var(--border);
+        }
+
+        @media (min-width: 768px) {
+            .cost-table td {
+                padding: 14px 16px;
+            }
         }
 
         .cost-table tr:last-child td {
@@ -603,7 +733,6 @@
         .cost-table .value {
             color: var(--primary);
             font-weight: 700;
-            font-size: 1.05em;
         }
 
         .cost-table .total-row {
@@ -612,19 +741,18 @@
 
         .cost-table .total-row .label {
             color: var(--primary);
-            font-size: 1.05em;
             font-family: 'Poppins', sans-serif;
         }
 
         .cost-table .total-row .value {
-            font-size: 1.3em;
+            font-size: 1.2em;
         }
 
         /* Error Message */
         .error-message {
             color: var(--danger);
-            font-size: 0.9em;
-            margin-top: 6px;
+            font-size: 0.85em;
+            margin-top: 5px;
             display: none;
         }
 
@@ -635,39 +763,6 @@
         input.error,
         select.error {
             border-color: var(--danger) !important;
-        }
-
-        /* Responsive */
-        @media (max-width: 768px) {
-            header h1 {
-                font-size: 2.5em;
-            }
-
-            .grid {
-                grid-template-columns: 1fr;
-            }
-
-            .results-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .tabs-navigation {
-                gap: 8px;
-            }
-
-            .tab-btn {
-                padding: 12px 24px;
-                font-size: 0.95em;
-            }
-
-            .rooms-table {
-                font-size: 0.9em;
-            }
-
-            .rooms-table th,
-            .rooms-table td {
-                padding: 12px;
-            }
         }
 
         /* Animations */
@@ -717,26 +812,39 @@
         .divider {
             height: 1px;
             background: var(--border);
-            margin: 28px 0;
+            margin: 20px 0;
+        }
+
+        @media (min-width: 768px) {
+            .divider {
+                margin: 28px 0;
+            }
         }
 
         /* Footer */
         .footer {
             text-align: center;
-            margin-top: 60px;
-            padding: 40px 20px;
+            margin-top: 50px;
+            padding: 30px 20px;
             color: white;
         }
 
+        @media (min-width: 768px) {
+            .footer {
+                margin-top: 60px;
+                padding: 40px 20px;
+            }
+        }
+
         .footer-content {
-            margin-bottom: 15px;
-            font-size: 0.95em;
+            margin-bottom: 10px;
+            font-size: 0.9em;
             font-weight: 300;
             letter-spacing: 0.5px;
         }
 
         .footer-credit {
-            font-size: 0.85em;
+            font-size: 0.8em;
             opacity: 0.8;
             font-weight: 300;
             letter-spacing: 0.3px;
@@ -753,15 +861,23 @@
 
         .summary-card {
             background: var(--light);
-            padding: 24px;
-            border-radius: 12px;
-            margin: 24px 0;
+            padding: 18px;
+            border-radius: 10px;
+            margin: 18px 0;
+        }
+
+        @media (min-width: 768px) {
+            .summary-card {
+                padding: 24px;
+                border-radius: 12px;
+                margin: 24px 0;
+            }
         }
 
         .summary-card h4 {
             color: var(--text-dark);
-            margin-bottom: 16px;
-            font-size: 1.05em;
+            margin-bottom: 12px;
+            font-size: 1em;
             font-family: 'Poppins', sans-serif;
             font-weight: 700;
         }
@@ -769,8 +885,16 @@
         .summary-item {
             display: flex;
             justify-content: space-between;
-            padding: 10px 0;
+            padding: 8px 0;
             border-bottom: 1px solid var(--border);
+            font-size: 0.9em;
+        }
+
+        @media (min-width: 768px) {
+            .summary-item {
+                padding: 10px 0;
+                font-size: 1em;
+            }
         }
 
         .summary-item:last-child {
@@ -789,24 +913,44 @@
         /* Premium Total Cost Display */
         .premium-cost-display {
             background: linear-gradient(135deg, rgba(236, 72, 153, 0.15) 0%, rgba(99, 102, 241, 0.15) 100%);
-            padding: 32px;
-            border-radius: 14px;
+            padding: 24px;
+            border-radius: 12px;
             border-left: 5px solid var(--secondary);
-            margin: 24px 0;
+            margin: 18px 0;
             display: flex;
-            justify-content: space-between;
+            flex-direction: column;
+            justify-content: center;
             align-items: center;
+            gap: 12px;
+            text-align: center;
+        }
+
+        @media (min-width: 640px) {
+            .premium-cost-display {
+                flex-direction: row;
+                justify-content: space-between;
+                align-items: center;
+                text-align: left;
+                padding: 28px;
+                gap: 16px;
+            }
+        }
+
+        @media (min-width: 768px) {
+            .premium-cost-display {
+                padding: 32px;
+            }
         }
 
         .premium-cost-display .label {
-            font-size: 1.2em;
+            font-size: clamp(1em, 4vw, 1.2em);
             color: var(--text-dark);
             font-weight: 600;
             font-family: 'Poppins', sans-serif;
         }
 
         .premium-cost-display .amount {
-            font-size: 3.2em;
+            font-size: clamp(2.2em, 8vw, 3.2em);
             font-weight: 800;
             background: linear-gradient(135deg, var(--secondary), var(--primary));
             -webkit-background-clip: text;
@@ -817,19 +961,20 @@
 
         /* Conversion Reference Inline */
         .conversion-ref {
-            display: inline;
+            display: block;
             color: var(--primary);
             font-weight: 600;
             font-family: 'Poppins', sans-serif;
-            font-size: 0.9em;
+            font-size: 0.85em;
+            margin: 8px 0;
         }
 
         .conversion-ref span {
             background: rgba(99, 102, 241, 0.08);
-            padding: 3px 8px;
+            padding: 4px 8px;
             border-radius: 5px;
-            white-space: nowrap;
-            margin: 0 4px;
+            display: inline-block;
+            margin: 4px 4px 4px 0;
         }
     </style>
 </head>
@@ -838,16 +983,16 @@
         <!-- Header -->
         <header>
             <h1>TileCalc Pro</h1>
-            <p>Intelligent Tile Calculator for Modern Spaces</p>
+            <p>Intelligent Tile Calculator</p>
         </header>
 
         <!-- Tabs Navigation -->
         <div class="tabs-navigation">
             <button class="tab-btn active" onclick="switchTab('calculator')">
-                📐 Calculate Tiles
+                📐 Calculate
             </button>
             <button class="tab-btn" onclick="switchTab('cost')">
-                💰 Cost Estimator
+                💰 Budget
             </button>
         </div>
 
@@ -861,9 +1006,9 @@
                     <div class="form-group required">
                         <label for="roomName">Space Name</label>
                         <div class="input-wrapper">
-                            <input type="text" id="roomName" placeholder="Master Bedroom, Kitchen, Living Room">
+                            <input type="text" id="roomName" placeholder="Master Bedroom">
                         </div>
-                        <div class="helper-text">Name your space for easy tracking</div>
+                        <div class="helper-text">Name your space</div>
                     </div>
 
                     <div class="form-group required">
@@ -872,7 +1017,6 @@
                             <input type="number" id="roomLength" placeholder="15" step="0.25" min="0">
                             <span class="input-unit">ft</span>
                         </div>
-                        <div class="error-message" id="error-roomLength"></div>
                     </div>
 
                     <div class="form-group required">
@@ -881,7 +1025,6 @@
                             <input type="number" id="roomWidth" placeholder="11.25" step="0.25" min="0">
                             <span class="input-unit">ft</span>
                         </div>
-                        <div class="error-message" id="error-roomWidth"></div>
                     </div>
 
                     <button class="btn" onclick="addRoom()">➕ Add Space</button>
@@ -895,7 +1038,7 @@
                             <span>3" = 0.25 ft</span>
                             <span>9" = 0.75 ft</span>
                         </div>
-                        <div style="margin-top: 10px; font-size: 0.9em;">💡 Example: 11'3" → 11 + (3÷12) = 11.25 ft</div>
+                        <div style="margin-top: 8px; font-size: 0.85em;">💡 Example: 11'3" = 11.25 ft</div>
                     </div>
                 </div>
 
@@ -909,7 +1052,6 @@
                             <input type="number" id="tileLength" placeholder="4" step="0.25" min="0">
                             <span class="input-unit">ft</span>
                         </div>
-                        <div class="error-message" id="error-tileLength"></div>
                     </div>
 
                     <div class="form-group required">
@@ -918,7 +1060,6 @@
                             <input type="number" id="tileWidth" placeholder="2" step="0.25" min="0">
                             <span class="input-unit">ft</span>
                         </div>
-                        <div class="error-message" id="error-tileWidth"></div>
                     </div>
 
                     <div class="preset-group">
@@ -941,7 +1082,7 @@
                 <table class="rooms-table">
                     <thead>
                         <tr>
-                            <th>Space Name</th>
+                            <th>Space</th>
                             <th>Length</th>
                             <th>Width</th>
                             <th>Area</th>
@@ -952,8 +1093,8 @@
                     </tbody>
                     <tfoot>
                         <tr class="total-row">
-                            <td colspan="3">Total Area</td>
-                            <td><strong id="totalAreaDisplay">0</strong> sq ft</td>
+                            <td colspan="3">Total</td>
+                            <td><strong id="totalAreaDisplay">0</strong></td>
                             <td style="text-align: center;">
                                 <button class="btn sm danger" onclick="clearAllRooms()">Clear</button>
                             </td>
@@ -967,7 +1108,7 @@
                 <div class="result-box hidden" id="totalRoomAreaBox">
                     <h3>Total Area</h3>
                     <div class="value" id="totalRoomAreaValue">0</div>
-                    <div class="unit">Square Feet</div>
+                    <div class="unit">sq ft</div>
                 </div>
 
                 <div class="result-box hidden" id="tileAreaBox">
@@ -977,9 +1118,9 @@
                 </div>
 
                 <div class="result-box success hidden" id="tilesNeededBox">
-                    <h3>Tiles Needed</h3>
+                    <h3>Needed</h3>
                     <div class="value" id="tilesNeededValue">0</div>
-                    <div class="unit">With 10% Buffer</div>
+                    <div class="unit">+10% Buffer</div>
                 </div>
 
                 <div class="result-box warning hidden" id="tilesMinBox">
@@ -991,7 +1132,7 @@
 
             <!-- Details Breakdown -->
             <div class="card full hidden" id="detailsCard">
-                <h2>Project Breakdown</h2>
+                <h2>Breakdown</h2>
                 <div class="details-box">
                     <ul class="details-list" id="detailsList"></ul>
                 </div>
@@ -1001,13 +1142,13 @@
         <!-- TAB 2: Cost Estimator -->
         <div id="cost" class="tab-content">
             <div class="info-box success">
-                ℹ️ <strong>Get Accurate Quotes:</strong> First calculate tiles above, then estimate your budget with pricing per box in Indian Rupees.
+                ℹ️ <strong>Get Your Budget:</strong> Calculate tiles first, then estimate cost with price per box.
             </div>
 
             <div class="grid">
                 <!-- Cost Calculation -->
                 <div class="card secondary">
-                    <h2>Budget Calculator</h2>
+                    <h2>Budget</h2>
                     
                     <div class="form-group">
                         <label for="boxPrice">Box Price</label>
@@ -1015,50 +1156,50 @@
                             <input type="number" id="boxPrice" placeholder="2500" step="0.01" min="0">
                             <span class="input-unit">₹</span>
                         </div>
-                        <div class="helper-text">Cost per box in Indian Rupees</div>
+                        <div class="helper-text">Cost per box</div>
                     </div>
 
                     <div class="form-group">
-                        <label for="tilesPerBox">Tiles Per Box</label>
+                        <label for="tilesPerBox">Tiles/Box</label>
                         <div class="input-wrapper">
                             <input type="number" id="tilesPerBox" placeholder="6" step="1" min="1">
                             <span class="input-unit">qty</span>
                         </div>
-                        <div class="helper-text">Number of tiles in one box</div>
+                        <div class="helper-text">Tiles in one box</div>
                     </div>
 
                     <div class="preset-group">
-                        <span class="preset-label">Standard Packages</span>
+                        <span class="preset-label">Packages</span>
                         <div class="preset-buttons">
-                            <button class="preset-btn" onclick="setBoxConfig(4)">4 Tiles</button>
-                            <button class="preset-btn" onclick="setBoxConfig(6)">6 Tiles</button>
-                            <button class="preset-btn" onclick="setBoxConfig(8)">8 Tiles</button>
-                            <button class="preset-btn" onclick="setBoxConfig(10)">10 Tiles</button>
+                            <button class="preset-btn" onclick="setBoxConfig(4)">4</button>
+                            <button class="preset-btn" onclick="setBoxConfig(6)">6</button>
+                            <button class="preset-btn" onclick="setBoxConfig(8)">8</button>
+                            <button class="preset-btn" onclick="setBoxConfig(10)">10</button>
                         </div>
                     </div>
 
-                    <button class="btn secondary" onclick="calculateCost()">Estimate Budget</button>
+                    <button class="btn secondary" onclick="calculateCost()">Estimate</button>
                 </div>
 
                 <!-- Cost Summary -->
                 <div class="card success hidden" id="costSummaryCard">
-                    <h2>Cost Summary</h2>
+                    <h2>Summary</h2>
                     <div class="summary-card">
-                        <h4>Total Investment</h4>
+                        <h4>Investment</h4>
                         <div class="summary-item">
-                            <span class="label">Tiles Needed</span>
+                            <span class="label">Tiles</span>
                             <span class="value" id="summaryTiles">0</span>
                         </div>
                         <div class="summary-item">
                             <span class="label">Per Box</span>
-                            <span class="value" id="summaryTilesPerBox">0 tiles</span>
+                            <span class="value" id="summaryTilesPerBox">0</span>
                         </div>
                         <div class="summary-item">
-                            <span class="label">Boxes Required</span>
+                            <span class="label">Boxes</span>
                             <span class="value" id="summaryBoxes">0</span>
                         </div>
                         <div class="summary-item">
-                            <span class="label">Price per Box</span>
+                            <span class="label">Price</span>
                             <span class="value" id="summaryBoxPrice">₹0</span>
                         </div>
                     </div>
@@ -1066,20 +1207,20 @@
                     <div class="divider"></div>
 
                     <div class="premium-cost-display">
-                        <span class="label">Total Project Cost</span>
+                        <span class="label">Total Cost</span>
                         <span class="amount" id="totalCostDisplay">₹0</span>
                     </div>
-                    <p style="color: var(--text-light); font-size: 0.88em; text-align: center; margin-top: 12px;">*Estimated based on current market rates</p>
+                    <p style="color: var(--text-light); font-size: 0.8em; text-align: center; margin-top: 10px;">*Estimated cost</p>
                 </div>
             </div>
 
-            <!-- Cost Breakdown Table -->
+            <!-- Cost Table -->
             <table class="cost-table hidden" id="costTable">
                 <thead>
                     <tr>
                         <th>Item</th>
-                        <th style="text-align: right;">Quantity</th>
-                        <th style="text-align: right;">Unit Price</th>
+                        <th style="text-align: right;">Qty</th>
+                        <th style="text-align: right;">Price</th>
                         <th style="text-align: right;">Total</th>
                     </tr>
                 </thead>
@@ -1091,19 +1232,17 @@
         <!-- Footer -->
         <div class="footer">
             <div class="footer-content">
-                © 2026 TileCalc Pro | Smart Tile Planning Solutions
+                © 2026 TileCalc Pro | Smart Solutions
             </div>
             <div class="footer-credit">
-                Designed & Crafted with precision by <strong>Yogesh Khedkar</strong>
+                Designed by <strong>Yogesh Khedkar</strong>
             </div>
         </div>
     </div>
 
     <script>
-        // Store all rooms
         let allRooms = [];
 
-        // Tab Switching
         function switchTab(tabName) {
             document.querySelectorAll('.tab-content').forEach(tab => {
                 tab.classList.remove('active');
@@ -1115,24 +1254,23 @@
             event.target.classList.add('active');
         }
 
-        // Add Room
         function addRoom() {
             const roomName = document.getElementById('roomName').value.trim();
             const roomLength = parseFloat(document.getElementById('roomLength').value);
             const roomWidth = parseFloat(document.getElementById('roomWidth').value);
 
             if (!roomName) {
-                alert('❌ Please enter a space name');
+                alert('❌ Enter space name');
                 return;
             }
 
             if (!roomLength || roomLength <= 0) {
-                alert('❌ Please enter a valid length');
+                alert('❌ Enter valid length');
                 return;
             }
 
             if (!roomWidth || roomWidth <= 0) {
-                alert('❌ Please enter a valid width');
+                alert('❌ Enter valid width');
                 return;
             }
 
@@ -1154,7 +1292,6 @@
             alert(`✅ ${roomName} added!`);
         }
 
-        // Display Rooms List
         function displayRoomsList() {
             if (allRooms.length === 0) {
                 document.getElementById('roomsListCard').classList.add('hidden');
@@ -1185,17 +1322,15 @@
             document.getElementById('totalAreaDisplay').textContent = totalArea.toFixed(2);
         }
 
-        // Remove Room
         function removeRoom(roomId) {
-            if (confirm('Remove this space?')) {
+            if (confirm('Remove?')) {
                 allRooms = allRooms.filter(room => room.id !== roomId);
                 displayRoomsList();
             }
         }
 
-        // Clear All Rooms
         function clearAllRooms() {
-            if (confirm('Clear all spaces? This action cannot be undone.')) {
+            if (confirm('Clear all spaces?')) {
                 allRooms = [];
                 displayRoomsList();
                 document.getElementById('resultsGrid').innerHTML = '';
@@ -1203,7 +1338,6 @@
             }
         }
 
-        // Set Tile Size
         function setTileSize(length, width) {
             document.getElementById('tileLength').value = length;
             document.getElementById('tileWidth').value = width;
@@ -1214,7 +1348,6 @@
             event.target.classList.add('selected');
         }
 
-        // Set Box Configuration
         function setBoxConfig(tilesPerBox) {
             document.getElementById('tilesPerBox').value = tilesPerBox;
 
@@ -1227,10 +1360,9 @@
             }
         }
 
-        // Calculate All Rooms
         function calculateAllRooms() {
             if (allRooms.length === 0) {
-                alert('❌ Add at least one space first!');
+                alert('❌ Add at least one space!');
                 return;
             }
 
@@ -1238,7 +1370,7 @@
             const tileWidth = parseFloat(document.getElementById('tileWidth').value);
 
             if (!tileLength || tileLength <= 0 || !tileWidth || tileWidth <= 0) {
-                alert('❌ Enter valid tile dimensions');
+                alert('❌ Enter valid tile size');
                 return;
             }
 
@@ -1256,14 +1388,13 @@
             window.calculatedTiles = tilesNeeded;
         }
 
-        // Display Results
         function displayResults(totalRoomArea, tileArea, tilesMin, tilesNeeded, tileLength, tileWidth) {
             const resultsGrid = document.getElementById('resultsGrid');
             resultsGrid.innerHTML = `
                 <div class="result-box">
                     <h3>Total Area</h3>
                     <div class="value">${totalRoomArea.toFixed(2)}</div>
-                    <div class="unit">Square Feet</div>
+                    <div class="unit">sq ft</div>
                 </div>
 
                 <div class="result-box">
@@ -1273,15 +1404,15 @@
                 </div>
 
                 <div class="result-box success">
-                    <h3>Tiles Needed</h3>
+                    <h3>Needed</h3>
                     <div class="value">${tilesNeeded}</div>
-                    <div class="unit">With 10% Buffer</div>
+                    <div class="unit">+10%</div>
                 </div>
 
                 <div class="result-box warning">
                     <h3>Minimum</h3>
                     <div class="value">${tilesMin}</div>
-                    <div class="unit">No Waste</div>
+                    <div class="unit">Exact</div>
                 </div>
             `;
 
@@ -1295,38 +1426,37 @@
                     <span class="value">${totalRoomArea.toFixed(2)} sq ft</span>
                 </li>
                 <li>
-                    <span><strong>Tile Size</strong></span>
-                    <span class="value">${tileLength}' × ${tileWidth}' (${tileArea.toFixed(2)} sq ft)</span>
+                    <span><strong>Tile: ${tileLength}' × ${tileWidth}'</strong></span>
+                    <span class="value">${tileArea.toFixed(2)} sq ft</span>
                 </li>
                 <li>
-                    <span><strong>Minimum Tiles</strong></span>
+                    <span><strong>Minimum</strong></span>
                     <span class="value">${tilesMin}</span>
                 </li>
                 <li>
-                    <span><strong>With 10% Buffer</strong></span>
+                    <span><strong>With Buffer</strong></span>
                     <span class="value">${tilesNeeded}</span>
                 </li>
                 <li>
-                    <span><strong>Extra for Waste</strong></span>
+                    <span><strong>Extra Tiles</strong></span>
                     <span class="value">${tilesNeeded - tilesMin}</span>
                 </li>
             `;
 
             const roomsLi = document.createElement('li');
             roomsLi.innerHTML = `
-                <span><strong>Spaces Calculated</strong></span>
+                <span><strong>Spaces</strong></span>
                 <span style="color: var(--primary); font-weight: 700;">${allRooms.length}</span>
             `;
             detailsList.appendChild(roomsLi);
         }
 
-        // Calculate Cost
         function calculateCost() {
             const boxPrice = parseFloat(document.getElementById('boxPrice').value);
             const tilesPerBox = parseFloat(document.getElementById('tilesPerBox').value);
 
             if (!boxPrice || boxPrice <= 0 || !tilesPerBox || tilesPerBox <= 0) {
-                alert('❌ Enter valid pricing information');
+                alert('❌ Enter valid pricing');
                 return;
             }
 
@@ -1343,7 +1473,7 @@
             document.getElementById('costSummaryCard').classList.remove('hidden');
 
             document.getElementById('summaryTiles').textContent = tilesNeeded;
-            document.getElementById('summaryTilesPerBox').textContent = tilesPerBox + ' tiles';
+            document.getElementById('summaryTilesPerBox').textContent = tilesPerBox;
             document.getElementById('summaryBoxes').textContent = boxesNeeded;
             document.getElementById('summaryBoxPrice').textContent = `₹${boxPrice.toFixed(2)}`;
             document.getElementById('totalCostDisplay').textContent = `₹${totalCost.toFixed(2)}`;
@@ -1376,7 +1506,7 @@
                     <td style="text-align: right;">-</td>
                 </tr>
                 <tr class="total-row">
-                    <td class="label">Total Cost</td>
+                    <td class="label">Total</td>
                     <td style="text-align: right;">-</td>
                     <td style="text-align: right;">-</td>
                     <td style="text-align: right; color: var(--secondary);" class="value">₹${totalCost.toFixed(2)}</td>
